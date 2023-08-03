@@ -10,30 +10,8 @@
 </head>
 
 <body>
-    <nav :class="[`navbar-${theme}`, `bg-${theme}`, `navbar navbar-expand-lg`]">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="#">Vue 3</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText"
-                aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarText">
-                <ul class="navbar-nav me-auto">
-                    <li v-for="(page, index) in pages" class="nav-item active" :key="index">
-                        <a class="nav-link" :class="{active: activePage == index}"
-                            :title="`This link goes to ${page.link.text} page`" :href="page.link.url"
-                            @click.prevent="activePage = index">{{page.link.text}}
-                        </a>
-                    </li>
-                </ul>
 
-                <form class="d-flex">
-                    <button class="btn btn-primary" @click.prevent="changeTheme">Toggle</button>
-                </form>
-
-            </div>
-        </div>
-    </nav>
+    <navbar :pages="pages" :active-page="activePage" :nav-link-click="(index) => activePage = index"></navbar>
 
     <page-viewer :page="pages[activePage]"></page-viewer>
 
@@ -42,7 +20,6 @@
             data() {
                 return {
                     activePage: 0,
-                    theme: 'light',
                     pages: [
                         {
                             link: { text: 'Home', url: 'index.html' },
@@ -63,7 +40,44 @@
                     ]
                 };
 
+            }
+        })
+
+        app.component('navbar', {
+            props: ['pages', 'activePage', 'navLinkClick'],
+            template: `
+            <nav :class="[\`navbar-\${theme}\`, \`bg-\${theme}\`, \`navbar navbar-expand-lg\`]">
+                <div class="container-fluid">
+                    <a class="navbar-brand" href="#">Vue 3</a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText"
+                        aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarText">
+                        <ul class="navbar-nav me-auto">
+                            <li v-for="(page, index) in pages" class="nav-item active" :key="index">
+                                <a class="nav-link" :class="{active: activePage == index}"
+                                    :title="\`This link goes to \${page.link.text} page\`" :href="page.link.url"
+                                    @click.prevent="navLinkClick(index)">{{page.link.text}}
+                                </a>
+                            </li>
+                        </ul>
+        
+                        <form class="d-flex">
+                            <button class="btn btn-primary" @click.prevent="changeTheme()">Toggle</button>
+                        </form>
+        
+                    </div>
+                </div>
+            </nav>
+            `,
+
+            data() {
+                return {
+                    theme: 'light',
+                }
             },
+
             methods: {
                 changeTheme() {
                     let theme = 'light';
@@ -74,7 +88,8 @@
                     this.theme = theme;
                 }
             }
-        })
+        });
+
 
         app.component('page-viewer', {
             props: ['page'],
