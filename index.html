@@ -10,7 +10,8 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg"
+        :class="{'navbar-light bg-light' : !useDarkNavber, 'navbar-dark bg-dark' : useDarkNavber }">
         <div class="container-fluid">
             <a class="navbar-brand" href="#">Vue 3</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText"
@@ -18,7 +19,7 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarText">
-                <ul class="navbar-nav mr-auto">
+                <ul class="navbar-nav me-auto">
                     <li v-for="(page, index) in pages" class="nav-item active" :key="index">
                         <a class="nav-link" :class="{active: activePage == index}"
                             :title="`This link goes to ${page.link.text} page`" :href="page.link.url"
@@ -26,6 +27,10 @@
                         </a>
                     </li>
                 </ul>
+
+                <form class="d-flex">
+                    <button class="btn btn-primary" @click.prevent="useDarkNavber = !useDarkNavber">Toggle</button>
+                </form>
 
             </div>
         </div>
@@ -42,7 +47,7 @@
                 return {
 
                     activePage: 0,
-
+                    useDarkNavber: false,
                     pages: [
                         {
                             link: { text: 'Home', url: 'index.html' },
