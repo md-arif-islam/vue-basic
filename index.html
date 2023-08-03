@@ -35,13 +35,10 @@
         </div>
     </nav>
 
-    <div id="content" class="container">
-        <h1>{{pages[activePage].pageTitle}}</h1>
-        <p>{{pages[activePage].content}}</p>
-    </div>
+    <page-viewer page-title="Title 2" page-content="Content 2"></page-viewer>
 
     <script>
-        Vue.createApp({
+        let app = Vue.createApp({
             data() {
                 return {
                     activePage: 0,
@@ -77,7 +74,17 @@
                     this.theme = theme;
                 }
             }
-        }).mount("body");
+        })
+
+        app.component('page-viewer', {
+            props: ['pageTitle', 'pageContent'],
+            template: ` <div class="container">
+                            <h1>{{pageTitle}}</h1>
+                            <p>{{pageContent}}</p>
+                        </div>`,
+        });
+
+        app.mount("body");
     </script>
 </body>
 
