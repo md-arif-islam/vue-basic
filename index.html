@@ -10,8 +10,7 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg"
-        :class="{'navbar-light bg-light' : !useDarkNavber, 'navbar-dark bg-dark' : useDarkNavber }">
+    <nav class="navbar navbar-expand-lg" :class="navbarClassess">
         <div class="container-fluid">
             <a class="navbar-brand" href="#">Vue 3</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText"
@@ -43,9 +42,19 @@
 
     <script>
         Vue.createApp({
+            computed: {
+                navbarClassess() {
+                    return {
+                        'navbar-light': !this.useDarkNavber,
+                        'bg-light': !this.useDarkNavber,
+                        'navbar-dark': this.useDarkNavber,
+                        'bg-dark': this.useDarkNavber
+                    }
+                }
+            },
+
             data() {
                 return {
-
                     activePage: 0,
                     useDarkNavber: false,
                     pages: [
