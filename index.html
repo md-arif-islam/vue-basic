@@ -20,7 +20,8 @@
             <div class="collapse navbar-collapse" id="navbarText">
                 <ul class="navbar-nav mr-auto">
                     <li v-for="(page, index) in pages" class="nav-item active" :key="index">
-                        <a class="nav-link" :title="`This link goes to ${page.link.text} page`" :href="page.link.url"
+                        <a class="nav-link" :class="{active: activePage == index}"
+                            :title="`This link goes to ${page.link.text} page`" :href="page.link.url"
                             @click.prevent="activePage = index">{{page.link.text}}
                         </a>
                     </li>
