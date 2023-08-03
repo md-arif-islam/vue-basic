@@ -20,7 +20,9 @@
             <div class="collapse navbar-collapse" id="navbarText">
                 <ul class="navbar-nav mr-auto">
                     <li v-for="link in links" class="nav-item active">
-                        <a class="nav-link" :href="link.url">{{link.text}}</a>
+                        <a class="nav-link" :title="`This link goes to ${link.text} page`"
+                            :href="link.url">{{link.text}}
+                        </a>
                     </li>
                 </ul>
 
