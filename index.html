@@ -10,7 +10,7 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg" :class="navbarClassess">
+    <nav class="navbar navbar-expand-lg" :class="navbarClasses">
         <div class="container-fluid">
             <a class="navbar-brand" href="#">Vue 3</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText"
@@ -43,7 +43,7 @@
     <script>
         Vue.createApp({
             computed: {
-                navbarClassess() {
+                navbarClasses() {
                     return {
                         'navbar-light': !this.useDarkNavber,
                         'bg-light': !this.useDarkNavber,
