@@ -19,14 +19,8 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarText">
                 <ul class="navbar-nav mr-auto">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="#">{{links[0]}}</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">{{links[1]}}</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">{{links[2]}}</a>
+                    <li v-for="link in links" class="nav-item active">
+                        <a class="nav-link" href="#">{{link}}</a>
                     </li>
                 </ul>
 
